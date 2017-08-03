@@ -1,0 +1,31 @@
+package msg;
+
+
+message Login_C2S {
+    optional string sdk = 1;
+    optional string uid = 2;
+    optional string token = 3;
+}
+
+
+message Login_S2C {
+    enum Code {
+        YES = 0;
+        NO = 1;
+    }
+    optional Code code = 1;
+}
+
+
+message RegisterName_C2S {
+    optional string nickname = 1;
+}
+
+
+message RegisterName_S2C {
+    enum Code {
+        YES = 0;
+        NO = 3;
+    }
+    optional Code code = 1;
+}
