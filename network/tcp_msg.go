@@ -5,8 +5,6 @@ import (
 	"errors"
 	"io"
 	"math"
-
-	"github.com/name5566/leaf/log"
 )
 
 // --------------
@@ -150,7 +148,6 @@ func (p *MsgParser) Write(conn *TCPConn, args ...[]byte) error {
 		l += len(args[i])
 	}
 
-	log.Debug("msg.len=%v", len(msg))
 	conn.Write(msg)
 
 	return nil
