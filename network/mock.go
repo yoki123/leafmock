@@ -8,26 +8,32 @@ import (
 )
 
 type MockClient struct {
-	conn      *TCPConn
-	processor Processor
-	functions map[interface{}]interface{}
-	// address         string
-	// pendingWriteNum int
+	conn            *TCPConn
+	processor       Processor
+	functions       map[interface{}]interface{}
+	address         string
+	pendingWriteNum int
 }
 
 func NewMockClient(address string, pendingWriteNum int) *MockClient {
 	mc := new(MockClient)
-	// mc.address = address
-	// mc.pendingWriteNum = pendingWriteNum
+	mc.address = address
+	mc.pendingWriteNum = pendingWriteNum
 	mc.functions = make(map[interface{}]interface{})
+	return mc
+}
 
-	conn, err := net.Dial("tcp", address)
+func (a *MockClient) SetProcessor(p Processor) {
+	a.processor = p
+}
+
+func (a *MockClient) Connect() {
+	conn, err := net.Dial("tcp", a.address)
 	if err != nil {
 		panic(err)
 	}
-	tcpConn := newTCPConn(conn, pendingWriteNum, NewMsgParser())
-	mc.conn = tcpConn
-	return mc
+	tcpConn := newTCPConn(conn, a.pendingWriteNum, NewMsgParser())
+	a.conn = tcpConn
 }
 
 func (a *MockClient) Run() {
@@ -61,10 +67,6 @@ func (a *MockClient) WriteMsg(msg interface{}) {
 			log.Error("write message %v error: %v", reflect.TypeOf(msg), err)
 		}
 	}
-}
-
-func (a *MockClient) SetProcessor(p Processor) {
-	a.processor = p
 }
 
 func (a *MockClient) Close() {

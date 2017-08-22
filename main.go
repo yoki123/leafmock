@@ -15,6 +15,8 @@ func main() {
 	mc.Register(&msg.Login_S2C{}, handleLogin_S2C)
 	mc.Register(&msg.RegisterName_S2C{}, handleRegisterName_S2C)
 
+	mc.Connect()
+
 	// login request
 	mc.WriteMsg(&msg.Login_C2S{
 		Sdk:   proto.String("mocksdk"),
@@ -23,7 +25,6 @@ func main() {
 	})
 
 	mc.Run()
-
 }
 
 func handleLogin_S2C(c interface{}, m interface{}) {
