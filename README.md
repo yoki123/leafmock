@@ -31,7 +31,7 @@ func handleLogin_S2C(c interface{}, m interface{}) {
 	if res.GetCode() == msg.Login_S2C_YES {
 		// if login success, register nickname
 		a.WriteMsg(&msg.RegisterName_C2S{
-			Nickname: proto.String("猴子请来的救比"),
+			Nickname: proto.String("猴子请来的救兵"),
 		})
 	}
 }
