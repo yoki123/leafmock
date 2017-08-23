@@ -1,0 +1,6 @@
+[submodule "protobuf"]
+	path = vendor/github.com/golang/protobuf
+	url = https://github.com/golang/protobuf
+[submodule "leaf"]
+	path = vendor/github.com/name5566/leaf
+	url = https://github.com/name5566/leaf.git
